@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "goal", #여기에 앱 이름을 추가해줘야 한다
 ]
 
 MIDDLEWARE = [

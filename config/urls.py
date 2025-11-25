@@ -15,9 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+# Study_Record/urls.py
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include #inlcude도 import해주어야 한다.
 
+# 리스트 안에 있는 path의 url 패턴(첫번째 인자)들에 따라서,
+# 패턴이 일치하면 실행할 함수(두번째인자)를 매칭 시켜준다.
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+     #'앱명/', include('앱명.urls')형식
+    path('goal/', include('goal.urls')),
 ]
