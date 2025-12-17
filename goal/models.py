@@ -53,6 +53,7 @@ class Record(models.Model):
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
     recorded_time = models.PositiveIntegerField(default=0) 
     recorded_at = models.DateTimeField() 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     # 💡 핵심 수정: 'dash.Subject'를 문자열로 참조
     # Django는 이 문자열을 보고 'dash' 앱에서 'Subject' 모델을 찾습니다.
