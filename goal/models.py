@@ -8,6 +8,7 @@ from django.db import models
 
 from django.db import models
 from django.contrib.auth import get_user_model 
+from django.utils import timezone
 
 # Django의 기본 User 모델을 안전하게 가져옵니다.
 User = get_user_model() 
@@ -28,9 +29,9 @@ class Goal(models.Model):
     goal_time = models.PositiveIntegerField(default=60) 
     
     # 목표 설정 날짜 (날짜는 유일해야 합니다. 한 날짜에 목표가 두 개일 필요는 없음)
-    goal_date = models.DateField(unique=True) 
+    goal_date = models.DateField(default=timezone.now) 
     
-    # (선택 사항) 목표에 대한 간단한 설명
+    # (선택 사항) 목표에 대한 간단한 설명 
     description = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
