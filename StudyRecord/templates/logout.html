@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그아웃 - StudyRecord</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <!-- 왼쪽 비주얼 섹션 -->
+        <div class="auth-visual">
+            <div class="visual-content">
+                <h1 class="visual-title">📚StudyRecord📚</h1>
+                <p class="visual-desc">다음에 또 만나요!<br>언제든지 다시 돌아오세요</p>
+            </div>
+        </div>
+
+        <!-- 오른쪽 폼 섹션 -->
+        <div class="auth-content">
+            <div class="logout-container">
+                <h2>로그아웃</h2>
+                <p class="subtitle">정말 로그아웃 하시겠습니까?</p>
+                
+                <div id="logout-status"></div>
+                
+                <button class="logout-btn" onclick="logoutUser(event)">
+                    로그아웃
+                </button>
+                
+                <div class="return-link">
+                    <a href="{% url 'login_html' %}">로그인 페이지로 돌아가기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/logout.js' %}"></script>
+</body>
+</html>
