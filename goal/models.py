@@ -30,9 +30,6 @@ class Goal(models.Model):
     
     # 목표 설정 날짜 (날짜는 유일해야 합니다. 한 날짜에 목표가 두 개일 필요는 없음)
     goal_date = models.DateField(default=timezone.now) 
-    
-    # (선택 사항) 목표에 대한 간단한 설명 
-    description = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.username}의 {self.goal_date} 목표 ({self.goal_time}분)"
