@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>학습 대시보드</title>
+
+    <link rel="stylesheet" href="{% static 'subject/dashboard.css' %}" />
+  </head>
+  <body>
+    <div class="header-section">
+      <h1>📑 학습 관리 대시보드</h1>
+      <a href="{% url 'time_measure' %}" class="main-btn">
+        ⏱ 공부 시간 측정하러 가기
+      </a>
+    </div>
+
+    <div class="container">
+      <div class="left-panel">
+        <div class="card">
+          <h3>카테고리 추가</h3>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label>카테고리 이름</label>
+              {{ category_form.name }}
+            </div>
+            <button
+              type="submit"
+              name="action"
+              value="add_category"
+              class="btn-blue"
+            >
+              카테고리 생성
+            </button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>과목 추가</h3>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label>카테고리 선택</label>
+              {{ subject_form.category_key }}
+            </div>
+            <div class="form-group">
+              <label>과목명</label>
+              {{ subject_form.name }}
+            </div>
+            <button
+              type="submit"
+              name="action"
+              value="add_subject"
+              class="btn-blue"
+            >
+              과목 생성
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <h3>내 과목 목록</h3>
+        <p style="color: gray; font-size: 0.9rem">
+          삭제하려면 체크 후 하단 버튼을 누르세요.
+        </p>
+
+        <form method="POST">
+          {% csrf_token %} {% for item in data %}
+          <div class="list-group">
+            <div class="category-title">
+              <span>
+                <input
+                  type="checkbox"
+                  name="selected_categories"
+                  value="{{ item.category.category_key }}"
+                />
+                📂 {{ item.category.name }}
+              </span>
+            </div>
+
+            {% if item.subjects %} {% for subject in item.subjects %}
+            <div class="subject-item">
+              <span>
+                └
+                <input
+                  type="checkbox"
+                  name="selected_subjects"
+                  value="{{ subject.subject_key }}"
+                />
+                {{ subject.name }}
+              </span>
+            </div>
+            {% endfor %} {% else %}
+            <div style="padding: 10px; color: #ccc; margin-left: 20px">
+              등록된 과목 없음
+            </div>
+            {% endif %}
+          </div>
+          {% endfor %}
+
+          <div style="text-align: right; margin-top: 20px">
+            <button
+              type="submit"
+              name="action"
+              value="delete_subject"
+              class="btn-red"
+              style="padding: 10px 20px; font-size: 1rem"
+            >
+              선택한 과목 삭제
+            </button>
+            <button
+              type="submit"
+              name="action"
+              value="delete_category"
+              class="btn-red"
+              style="
+                padding: 10px 20px;
+                font-size: 1rem;
+                background-color: #666;
+              "
+            >
+              선택한 카테고리 삭제
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

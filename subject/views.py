@@ -1,76 +1,103 @@
-from django.shortcuts import render, redirect
-from datetime import timedelta
-from .models import *
-from .forms import *
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from .models import Category, Subject, Record, Goal
+from .forms import CategoryForm, SubjectForm
+import math
 
-temp, created=Temp.objects.get_or_create(user_key=1) #
+@login_required(login_url='login_html')
+def dashboard(request):
+    user = request.user
 
-def subject_main(request):
-    if not Category.objects.filter(user_key=temp).exists():
-        Category.objects.create(name="기본",user_key=temp)
-    categories = Category.objects.filter(user_key=temp)
+    if request.method == "POST":
+        action = request.POST.get('action')
 
-
-    data = []
-    for i in categories:
-        subjects = Subject.objects.filter(category_key=i)
-        if subjects.exists():
-            data.append({
-                'category': i,
-                'subjects': subjects
-            })
-        else:
-            data.append({
-                'category': i,
-                'subjects': None
-            })
-    return render(request,"subject_main_view.html", {'data': data})
-
-
-def subject_delete(request):
-    if request.method=="POST":
-        selected_subject = request.POST.getlist('select')
-        Subject.objects.filter(subject_key__in=selected_subject).delete()
-    return redirect('subject_main_view')
-
-
-def subject_add(request):
-    if request.method=="GET":
-        form=SubjectForm()
-        form.fields['category_key'].queryset = Category.objects.filter(user_key=1)
-        return render(request,"subject_add_view.html", {"form":form})
-    
-    if request.method=="POST":
-        form=SubjectForm(request.POST)
-        if form.is_valid():
-            subject = form.save(commit=False)
-            subject.user_key = temp
-            subject.save()
-            return redirect('subject_add_view')
-        else:
-            return render(request, "subject_add_view.html", {"form": form})
-    
-
-def category_manage(request):
-    if request.method=="GET":
-        form=CategoryForm()
-        categories=Category.objects.filter(user_key=temp)
-        return render(request,"category_manage_view.html", {"form": form, "categories" : categories})
-    elif request.method=="POST":
-        if request.POST.get("action")=='delete':
-            selected_category=request.POST.getlist('select')
-            Category.objects.filter(category_key__in=selected_category).delete()
-            return redirect('category_manage_view')
-        elif request.POST.get("action")=='update':
-            form=CategoryForm(request.POST)
+        if action == 'add_category':
+            form = CategoryForm(request.POST)
             if form.is_valid():
                 category = form.save(commit=False)
-                category.user_key = temp
+                category.user_key = user
                 category.save()
-                return redirect('category_manage_view')
-            else:
-                categories=Category.objects.filter(user_key=temp)
-            return render(request,"category_manage_view.html", {"form": form, "categories" : categories})
+                return redirect('dashboard')
 
+        elif action == 'add_subject':
+            form = SubjectForm(request.POST, user=user) 
+            if form.is_valid():
+                subject = form.save(commit=False)
+                subject.user_key = user
+                subject.save()
+                return redirect('dashboard')
+
+        elif action == 'delete_subject':
+            selected_subjects = request.POST.getlist('selected_subjects')
+            if selected_subjects:
+                Subject.objects.filter(subject_key__in=selected_subjects, user_key=user).delete()
+            return redirect('dashboard')
+        
+        elif action == 'delete_category':
+            selected_categories = request.POST.getlist('selected_categories')
+            if selected_categories:
+                Category.objects.filter(category_key__in=selected_categories, user_key=user).delete()
+            return redirect('dashboard')
+
+    category_form = CategoryForm()
+    subject_form = SubjectForm(user=user)
+
+    Category.objects.get_or_create(name="기본", user_key=user)
+    categories = Category.objects.filter(user_key=user)
+
+    data = []
+    for category in categories:
+        subjects = Subject.objects.filter(category_key=category, user_key=user)
+        data.append({
+            'category': category,
+            'subjects': subjects
+        })
+
+    context = {
+        'category_form': category_form,
+        'subject_form': subject_form,
+        'data': data,
+        'categories': categories
+    }
+    
+    return render(request, "subject/dashboard.html", context)
+
+
+@login_required(login_url='login_html')
 def time_measure(request):
-        return render(request, "time_measure_view.html")
+    user = request.user
+    today = timezone.now().date()
+    
+    subjects = Subject.objects.filter(user_key=user)
+
+    if request.method == "GET":
+        return render(request, "subject/time_measure_view.html", {"subjects" : subjects})
+
+    elif request.method == "POST":
+        subject_id = request.POST.get('subject_key')
+        time_seconds = request.POST.get('time_seconds')
+
+        if subject_id and time_seconds:
+            subject = get_object_or_404(Subject, pk=subject_id)
+
+            goal, created = Goal.objects.get_or_create(
+                user=user, 
+                goal_date=today, 
+                defaults={'goal_time':60}
+            )
+            
+            seconds = int(time_seconds)
+            minutes = math.ceil(seconds / 60)
+            
+            Record.objects.create(
+                user=user, goal=goal, 
+                subject=subject, 
+                recorded_time=minutes, 
+                recorded_at=timezone.now()
+            )
+            
+            return redirect('dashboard') 
+        
+        else:
+            return render(request, "subject/time_measure_view.html", {"subjects": subjects})
