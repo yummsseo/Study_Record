@@ -205,3 +205,21 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# .gitignore 파일 내용
+
+# 가상환경 폴더 (절대 올리면 안 됨!)
+venv/
+env/
+.env
+
+# 데이터베이스 (내 컴퓨터 테스트용 데이터이므로 공유 X)
+db.sqlite3
+
+# 파이썬 컴파일 파일 (쓰레기 파일)
+__pycache__/
+*.pyc
+
+# 맥북 쓰레기 파일
+.DS_Store
