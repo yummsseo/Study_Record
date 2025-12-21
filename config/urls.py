@@ -1,29 +1,16 @@
-"""
-URL configuration for config project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-
-# Study_Record/urls.py
 from django.contrib import admin
-from django.urls import path, include #inlcude도 import해주어야 한다.
+from django.urls import path, include
 
-# 리스트 안에 있는 path의 url 패턴(첫번째 인자)들에 따라서,
-# 패턴이 일치하면 실행할 함수(두번째인자)를 매칭 시켜준다.
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-     #'앱명/', include('앱명.urls')형식
-    path('goal/', include('goal.urls'))
+    # 1. goal 앱 연결 (http://127.0.0.1:8000/goal/)
+    path('goal/', include('goal.urls')),
+
+    # 2. dash 앱 연결 (http://127.0.0.1:8000/dash/)
+    path('dash/', include('dash.urls')),
+    
+    # (선택사항) 만약 주소창에 아무것도 안 쳤을 때(http://127.0.0.1:8000/) 
+    # 바로 대시보드로 가게 하고 싶다면 아래 줄을 추가하세요.
+    # path('', include('dash.urls')), 
 ]
