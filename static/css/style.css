@@ -1,0 +1,188 @@
+/* 1. 기본 초기화 및 변수 설정 */
+:root {
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --primary-light: #818cf8;
+    --danger: #ef4444;
+    --success: #10b981;
+    --bg-main: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --white: #ffffff;
+    --gray-50: #f9fafb;
+    --gray-200: #e5e7eb;
+    --gray-800: #1f2937;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 2. 전체 화면 레이아웃 (핵심!) */
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    overflow-x: hidden;
+}
+
+.auth-wrapper {
+    display: flex; /* 화면을 좌우로 분할 */
+    width: 100vw;
+    min-height: 100vh;
+}
+
+/* 3. 왼쪽 비주얼 섹션 (화면의 60% 차지) */
+.auth-visual {
+    flex: 1.2; 
+    background: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 움직이는 배경 장식 */
+.auth-visual::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: -100px;
+    left: -100px;
+    animation: float 10s infinite alternate;
+}
+
+@keyframes float {
+    from { transform: translate(0, 0); }
+    to { transform: translate(50px, 50px); }
+}
+
+.visual-content {
+    text-align: center;
+    z-index: 2;
+}
+
+.visual-title {
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+}
+
+.visual-desc {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* 4. 오른쪽 폼 섹션 (화면의 40% 차지) */
+.auth-content {
+    flex: 0.8;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.container, .signup-container, .logout-container {
+    width: 100%;
+    max-width: 400px; /* 폼이 너무 퍼지지 않게 제한 */
+    animation: fadeInUp 0.7s ease-out;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 5. 텍스트 및 입력창 스타일 */
+h2 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--gray-800);
+}
+
+.subtitle {
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 35px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    background: var(--gray-50);
+    font-size: 15px;
+    transition: all 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* 6. 버튼 스타일 */
+button, input[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px rgba(99, 102, 241, 0.2);
+}
+
+/* 7. 기타 링크 및 반응형 */
+.login-link, .return-link {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.login-link a, .return-link a {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .auth-wrapper { flex-direction: column; }
+    .auth-visual { flex: 0.5; padding: 40px; }
+    .auth-content { flex: 1; }
+}
