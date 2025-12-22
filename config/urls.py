@@ -1,16 +1,18 @@
-# config/urls.py
-
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import RedirectView
 
 urlpatterns = [
-    # 관리자 페이지
-    path('admin/', admin.site.urls),
-    
-    # users 앱의 인증 관련 URL
+    path("admin/", admin.site.urls),
+
+    # 1. goal 앱 연결 (http://127.0.0.1:8000/goal/)
+    path('goal/', include('goal.urls')),
+
+    # 2. dash 앱 연결 (http://127.0.0.1:8000/dash/)
+    path('dash/', include('dash.urls')),
+
     path('auth/', include('users.urls')),
     
-    # 메인 페이지 - 로그인 페이지로 리다이렉트
-    path('', RedirectView.as_view(url='/auth/login.html'), name='index'),
+    # (선택사항) 만약 주소창에 아무것도 안 쳤을 때(http://127.0.0.1:8000/) 
+    # 바로 대시보드로 가게 하고 싶다면 아래 줄을 추가하세요.
+    # path('', include('dash.urls')), 
 ]
