@@ -1,0 +1,79 @@
+.timer-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.subject-select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-width: 200px;
+}
+
+#display {
+  font-size: 4rem;
+  margin: 40px 0;
+  font-weight: bold;
+  color: #333;
+  font-family: monospace;
+}
+
+.button-group {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-basic {
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.btn-basic:hover {
+  background-color: #e0e0e0;
+}
+
+.btn-save {
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn-save:hover {
+  background-color: #45a049;
+}
+
+.back-link-container {
+  margin-top: 40px;
+}
+
+.back-link {
+  text-decoration: none;
+  color: gray;
+  border-bottom: 1px solid gray;
+  padding-bottom: 2px;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #333;
+  border-bottom: 1px solid #333;
+}

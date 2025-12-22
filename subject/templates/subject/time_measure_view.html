@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공부 시간 측정</title>
+
+    <link href="{% static 'subject/timer.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="timer-container">
+      <h2>⏱ 공부 시간 측정</h2>
+
+      <form id="timerForm" method="POST" action="{% url 'time_measure' %}">
+        {% csrf_token %}
+
+        <select name="subject_key" required class="subject-select">
+          <option value="">과목을 선택하세요</option>
+          {% for subject in subjects %}
+          <option value="{{ subject.subject_key }}">{{ subject.name }}</option>
+          {% endfor %}
+        </select>
+
+        <div id="display">00:00:00</div>
+
+        <input type="hidden" name="time_seconds" id="timeInput" value="0" />
+
+        <div class="button-group">
+          <button type="button" onclick="startTimer()" class="btn-basic">
+            시작
+          </button>
+
+          <button type="button" onclick="pauseTimer()" class="btn-basic">
+            일시정지
+          </button>
+
+          <button type="submit" onclick="stopAndSave()" class="btn-save">
+            기록 저장
+          </button>
+        </div>
+      </form>
+
+      <div class="back-link-container">
+        <a href="{% url 'dashBoard' %}" class="back-link">
+          메인 화면으로 돌아가기
+        </a>
+      </div>
+    </div>
+
+    <script src="{% static 'subject/timer.js' %}"></script>
+  </body>
+</html>
