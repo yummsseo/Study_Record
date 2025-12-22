@@ -15,7 +15,7 @@ urlpatterns = [
     
     # 메인 페이지 - 로그인 페이지로 리다이렉트
     path('', RedirectView.as_view(url='/auth/login.html'), name='index'),
-]
+    
     # 과목 관리 url
     path('subject/', include('subject.urls')),
 ]

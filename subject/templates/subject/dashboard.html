@@ -3,24 +3,26 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>학습 대시보드</title>
+    <title>학습 통합 대시보드</title>
 
     <link rel="stylesheet" href="{% static 'subject/dashboard.css' %}" />
   </head>
   <body>
     <div class="header-section">
-      <h1>📑 학습 관리 대시보드</h1>
+      <h1>📑 과목 관리</h1>
 
       <div class="header-buttons">
+        {% comment %}
         <a href="{% url 'time_measure' %}" class="main-btn">
           ⏱ 공부 시간 측정하러 가기
         </a>
 
-        <a href="#" class="nav-btn"> 🎯 학습 목표 관리 </a>
-        <!--페이지 url 연결 필요-->
+        <a href="{% url 'goal_list' %}" class="nav-btn"> 🎯 학습 목표 관리 </a>
+        {% endcomment %}
 
-        <a href="#" class="nav-btn"> 📊 학습 기록 확인 </a>
-        <!--페이지 url 연결 필요-->
+        <a href="{% url 'dashBoard' %}" class="main-btn">
+          📊 대시보드로 돌아가기
+        </a>
 
         <button type="button" class="logout-btn" onclick="handleLogout()">
           로그아웃

@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from .models import Category, Subject, Record, Goal
+from .models import Category, Subject
+from goal.models import Goal, Record
 from .forms import CategoryForm, SubjectForm
 import math
 
@@ -97,7 +98,7 @@ def time_measure(request):
                 recorded_at=timezone.now()
             )
             
-            return redirect('dashboard') 
+            return redirect('dashBoard') 
         
         else:
             return render(request, "subject/time_measure_view.html", {"subjects": subjects})
