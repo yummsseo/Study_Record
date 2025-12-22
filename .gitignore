@@ -223,3 +223,6 @@ __pycache__/
 
 # 맥북 쓰레기 파일
 .DS_Store
+
+# 개인 환경 설정 파일
+settings.json
