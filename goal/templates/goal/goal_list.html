@@ -101,7 +101,6 @@
         display: block;
       }
 
-<<<<<<< HEAD
         /* 목표 설정 안내 */
         .setup-box { background-color: #fff; border: 1px solid #dadce0; padding: 25px; border-radius: 15px; margin-top: 40px; text-align: center; }
         .setup-box p { font-size: 0.95rem; color: #5f6368; line-height: 1.6; }
@@ -110,35 +109,6 @@
         .btn { border: none; cursor: pointer; display: inline-block; padding: 12px 30px; background-color: #1a73e8; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; margin-top: 15px; box-shadow: 0 4px 10px rgba(26, 115, 232, 0.2); transition: 0.2s; }
         .btn:hover { background-color: #1557b0; transform: translateY(-1px); }
         .input-field { padding: 10px; border-radius: 8px; border: 1px solid #dadce0; width: 60%; font-size: 1rem; text-align: center; }
-=======
-      /* 프로그레스 바 */
-      .progress-container {
-        background-color: #e8eaed;
-        border-radius: 20px;
-        height: 35px;
-        width: 100%;
-        position: relative;
-        margin: 25px 0;
-        overflow: hidden;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-      }
-      .progress-bar {
-        height: 100%;
-        background: linear-gradient(90deg, #4285f4, #34a853);
-        border-radius: 20px;
-        transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .progress-text {
-        position: absolute;
-        width: 100%;
-        text-align: center;
-        top: 0;
-        line-height: 35px;
-        font-weight: bold;
-        color: #fff;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-      }
->>>>>>> ca0f6408a37e215e6e8c59a13697793eebc835ae
 
       /* 목표 설정 안내 */
       .setup-box {
@@ -228,34 +198,15 @@
           {% endif %}
         </p>
         {% else %}
-<<<<<<< HEAD
         <div style="text-align: center; padding: 40px 20px; background: #fff5f5; border-radius: 12px; margin: 20px 0;">
             <p style="color: #d93025; margin: 0; font-weight: bold;">이 날짜에 설정된 목표가 없습니다.</p>
             <p style="color: #70757a; font-size: 0.85rem; margin-top: 5px;">아래 입력창에서 목표를 등록해 보세요.</p>
-=======
-        <div
-          style="
-            text-align: center;
-            padding: 40px 20px;
-            background: #fff5f5;
-            border-radius: 12px;
-            margin: 20px 0;
-          "
-        >
-          <p style="color: #d93025; margin: 0; font-weight: bold">
-            이 날짜에 설정된 목표가 없습니다.
-          </p>
-          <p style="color: #70757a; font-size: 0.85rem; margin-top: 5px">
-            아래 버튼을 눌러 목표를 추가해 보세요.
-          </p>
->>>>>>> ca0f6408a37e215e6e8c59a13697793eebc835ae
         </div>
         {% endif %}
       </section>
 
       <section class="setup-box">
         <h3>⚙️ 목표 설정</h3>
-<<<<<<< HEAD
         <p>선택하신 날짜의 학습 목표를 설정하거나 수정하세요.</p>
         
         <form action="{% url 'goal_list' %}" method="POST">
@@ -275,16 +226,6 @@
             </div>
         </form>
     </section>
-=======
-        <p>
-          선택하신 날짜의 학습 목표를 수정하거나<br />새로운 목표를 등록할 수
-          있습니다.
-        </p>
-        <a href="#" class="btn">
-          {% if goal %}목표 수정하기{% else %}새 목표 등록하기{% endif %}
-        </a>
-      </section>
->>>>>>> ca0f6408a37e215e6e8c59a13697793eebc835ae
 
       <a href="/dash/" class="footer-link">← 대시보드로 돌아가기</a>
     </div>
