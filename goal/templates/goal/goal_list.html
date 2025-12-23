@@ -1,40 +1,107 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>학습 목표 관리</title>
     <style>
-        /* 기본 스타일 초기화 */
-        body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: 40px auto; background: #fff; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        
-        /* 날짜 이동 내비게이션 */
-        .date-nav { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 30px; }
-        .date-nav h2 { margin: 0; color: #1a73e8; font-size: 1.5rem; min-width: 220px; text-align: center; }
-        .nav-btn { 
-            text-decoration: none; font-size: 1.2rem; color: #5f6368; 
-            width: 40px; height: 40px; border: 1px solid #dadce0; 
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            transition: all 0.2s; background: white;
-        }
-        .nav-btn:hover { background-color: #f1f3f4; color: #1a73e8; border-color: #1a73e8; }
-        .today-link { display: block; text-align: center; margin-top: 5px; font-size: 0.85rem; color: #70757a; text-decoration: none; }
-        .today-link:hover { text-decoration: underline; }
+      /* 기본 스타일 초기화 */
+      body {
+        font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        background-color: #f0f2f5;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
 
-        h3 { border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 1.1rem; margin-top: 30px; }
+      /* 날짜 이동 내비게이션 */
+      .date-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      .date-nav h2 {
+        margin: 0;
+        color: #1a73e8;
+        font-size: 1.5rem;
+        min-width: 220px;
+        text-align: center;
+      }
+      .nav-btn {
+        text-decoration: none;
+        font-size: 1.2rem;
+        color: #5f6368;
+        width: 40px;
+        height: 40px;
+        border: 1px solid #dadce0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        background: white;
+      }
+      .nav-btn:hover {
+        background-color: #f1f3f4;
+        color: #1a73e8;
+        border-color: #1a73e8;
+      }
+      .today-link {
+        display: block;
+        text-align: center;
+        margin-top: 5px;
+        font-size: 0.85rem;
+        color: #70757a;
+        text-decoration: none;
+      }
+      .today-link:hover {
+        text-decoration: underline;
+      }
 
-        /* 요약 섹션 */
-        .summary { display: flex; justify-content: space-between; margin: 25px 0; background: #f8f9fa; padding: 20px; border-radius: 12px; }
-        .stat-item { text-align: center; flex: 1; }
-        .stat-value { display: block; font-size: 1.6rem; font-weight: bold; color: #202124; }
-        .stat-label { font-size: 0.85rem; color: #70757a; margin-bottom: 5px; display: block; }
+      h3 {
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        font-size: 1.1rem;
+        margin-top: 30px;
+      }
 
-        /* 프로그레스 바 */
-        .progress-container { background-color: #e8eaed; border-radius: 20px; height: 35px; width: 100%; position: relative; margin: 25px 0; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
-        .progress-bar { height: 100%; background: linear-gradient(90deg, #4285f4, #34a853); border-radius: 20px; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .progress-text { position: absolute; width: 100%; text-align: center; top: 0; line-height: 35px; font-weight: bold; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+      /* 요약 섹션 */
+      .summary {
+        display: flex;
+        justify-content: space-between;
+        margin: 25px 0;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+      }
+      .stat-item {
+        text-align: center;
+        flex: 1;
+      }
+      .stat-value {
+        display: block;
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #202124;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+        color: #70757a;
+        margin-bottom: 5px;
+        display: block;
+      }
 
+<<<<<<< HEAD
         /* 목표 설정 안내 */
         .setup-box { background-color: #fff; border: 1px solid #dadce0; padding: 25px; border-radius: 15px; margin-top: 40px; text-align: center; }
         .setup-box p { font-size: 0.95rem; color: #5f6368; line-height: 1.6; }
@@ -43,61 +110,152 @@
         .btn { border: none; cursor: pointer; display: inline-block; padding: 12px 30px; background-color: #1a73e8; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; margin-top: 15px; box-shadow: 0 4px 10px rgba(26, 115, 232, 0.2); transition: 0.2s; }
         .btn:hover { background-color: #1557b0; transform: translateY(-1px); }
         .input-field { padding: 10px; border-radius: 8px; border: 1px solid #dadce0; width: 60%; font-size: 1rem; text-align: center; }
+=======
+      /* 프로그레스 바 */
+      .progress-container {
+        background-color: #e8eaed;
+        border-radius: 20px;
+        height: 35px;
+        width: 100%;
+        position: relative;
+        margin: 25px 0;
+        overflow: hidden;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #4285f4, #34a853);
+        border-radius: 20px;
+        transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .progress-text {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        top: 0;
+        line-height: 35px;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+>>>>>>> ca0f6408a37e215e6e8c59a13697793eebc835ae
 
-        .footer-link { display: block; text-align: center; margin-top: 30px; color: #70757a; text-decoration: none; font-size: 0.9rem; }
-        .footer-link:hover { color: #1a73e8; }
+      /* 목표 설정 안내 */
+      .setup-box {
+        background-color: #fff;
+        border: 1px solid #dadce0;
+        padding: 25px;
+        border-radius: 15px;
+        margin-top: 40px;
+        text-align: center;
+      }
+      .setup-box p {
+        font-size: 0.95rem;
+        color: #5f6368;
+        line-height: 1.6;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: #1a73e8;
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: bold;
+        margin-top: 15px;
+        box-shadow: 0 4px 10px rgba(26, 115, 232, 0.2);
+      }
+      .btn:hover {
+        background-color: #1557b0;
+        transform: translateY(-1px);
+      }
+
+      .footer-link {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        color: #70757a;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .footer-link:hover {
+        color: #1a73e8;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="container">
+      <div class="date-nav">
+        <a href="?date={{ prev_date }}" class="nav-btn" title="이전 날짜"
+          >&lt;</a
+        >
 
-<div class="container">
-    <div class="date-nav">
-        <a href="?date={{ prev_date }}" class="nav-btn" title="이전 날짜">&lt;</a>
-        
         <div>
-            <h2>🎯 {{ target_date|date:"Y년 m월 d일" }}</h2>
-            <a href="{% url 'goal_list' %}" class="today-link">오늘로 돌아가기</a>
+          <h2>🎯 {{ target_date|date:"Y년 m월 d일" }}</h2>
+          <a href="{% url 'goal_list' %}" class="today-link">오늘로 돌아가기</a>
         </div>
 
-        <a href="?date={{ next_date }}" class="nav-btn" title="다음 날짜">&gt;</a>
-    </div>
+        <a href="?date={{ next_date }}" class="nav-btn" title="다음 날짜"
+          >&gt;</a
+        >
+      </div>
 
-    <section>
+      <section>
         <h3>📈 학습 성취도</h3>
         {% if goal %}
         <div class="summary">
-            <div class="stat-item">
-                <span class="stat-label">설정 목표</span>
-                <span class="stat-value">{{ goal_time }}<small>분</small></span>
-            </div>
-            <div class="stat-item" style="border-left: 1px solid #dee2e6;">
-                <span class="stat-label">현재 완료</span>
-                <span class="stat-value" style="color: #34a853;">{{ total_time }}<small>분</small></span>
-            </div>
+          <div class="stat-item">
+            <span class="stat-label">설정 목표</span>
+            <span class="stat-value">{{ goal_time }}<small>분</small></span>
+          </div>
+          <div class="stat-item" style="border-left: 1px solid #dee2e6">
+            <span class="stat-label">현재 완료</span>
+            <span class="stat-value" style="color: #34a853"
+              >{{ total_time }}<small>분</small></span
+            >
+          </div>
         </div>
 
         <div class="progress-container">
-            <div class="progress-bar" style="width: {{ percentage }}%;"></div>
-            <div class="progress-text">{{ percentage }}% 달성</div>
+          <div class="progress-bar" style="width: {{ percentage }}%;"></div>
+          <div class="progress-text">{{ percentage }}% 달성</div>
         </div>
-        
-        <p style="text-align: center; color: #5f6368; font-size: 0.95rem;">
-            {% if percentage >= 100 %}
-                🎉 <strong>축하합니다!</strong> 오늘의 목표를 모두 달성했습니다!
-            {% else %}
-                목표까지 <strong>{{ goal_time|add:"-total_time" }}분</strong> 더 집중해볼까요?
-            {% endif %}
+
+        <p style="text-align: center; color: #5f6368; font-size: 0.95rem">
+          {% if percentage >= 100 %} 🎉 <strong>축하합니다!</strong> 오늘의
+          목표를 모두 달성했습니다! {% else %} 목표까지
+          <strong>{{ goal_time|add:"-total_time" }}분</strong> 더 집중해볼까요?
+          {% endif %}
         </p>
         {% else %}
+<<<<<<< HEAD
         <div style="text-align: center; padding: 40px 20px; background: #fff5f5; border-radius: 12px; margin: 20px 0;">
             <p style="color: #d93025; margin: 0; font-weight: bold;">이 날짜에 설정된 목표가 없습니다.</p>
             <p style="color: #70757a; font-size: 0.85rem; margin-top: 5px;">아래 입력창에서 목표를 등록해 보세요.</p>
+=======
+        <div
+          style="
+            text-align: center;
+            padding: 40px 20px;
+            background: #fff5f5;
+            border-radius: 12px;
+            margin: 20px 0;
+          "
+        >
+          <p style="color: #d93025; margin: 0; font-weight: bold">
+            이 날짜에 설정된 목표가 없습니다.
+          </p>
+          <p style="color: #70757a; font-size: 0.85rem; margin-top: 5px">
+            아래 버튼을 눌러 목표를 추가해 보세요.
+          </p>
+>>>>>>> ca0f6408a37e215e6e8c59a13697793eebc835ae
         </div>
         {% endif %}
-    </section>
+      </section>
 
-    <section class="setup-box">
+      <section class="setup-box">
         <h3>⚙️ 목표 설정</h3>
+<<<<<<< HEAD
         <p>선택하신 날짜의 학습 목표를 설정하거나 수정하세요.</p>
         
         <form action="{% url 'goal_list' %}" method="POST">
@@ -117,9 +275,18 @@
             </div>
         </form>
     </section>
+=======
+        <p>
+          선택하신 날짜의 학습 목표를 수정하거나<br />새로운 목표를 등록할 수
+          있습니다.
+        </p>
+        <a href="#" class="btn">
+          {% if goal %}목표 수정하기{% else %}새 목표 등록하기{% endif %}
+        </a>
+      </section>
+>>>>>>> ca0f6408a37e215e6e8c59a13697793eebc835ae
 
-    <a href="/dash/" class="footer-link">← 대시보드로 돌아가기</a>
-</div>
-
-</body>
+      <a href="/dash/" class="footer-link">← 대시보드로 돌아가기</a>
+    </div>
+  </body>
 </html>
